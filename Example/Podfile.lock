@@ -1,0 +1,27 @@
+PODS:
+  - EasyObserve (0.1.0)
+  - Nimble (9.2.1)
+  - Quick (4.0.0)
+
+DEPENDENCIES:
+  - EasyObserve (from `../`)
+  - Nimble
+  - Quick
+
+SPEC REPOS:
+  trunk:
+    - Nimble
+    - Quick
+
+EXTERNAL SOURCES:
+  EasyObserve:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  EasyObserve: d961d47ae828b71394475b12af94c3c5c19aeb5b
+  Nimble: e7e615c0335ee4bf5b0d786685451e62746117d5
+  Quick: 6473349e43b9271a8d43839d9ba1c442ed1b7ac4
+
+PODFILE CHECKSUM: 75f820e2a69d03a2b569e16f6f6e6831e248a97c
+
+COCOAPODS: 1.11.2

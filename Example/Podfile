@@ -1,6 +1,6 @@
 use_frameworks!
 
-platform :ios, '9.0'
+platform :ios, '12.0'
 
 target 'EasyObserve_Example' do
   pod 'EasyObserve', :path => '../'
@@ -8,7 +8,7 @@ target 'EasyObserve_Example' do
   target 'EasyObserve_Tests' do
     inherit! :search_paths
 
-    pod 'Quick', '~> 2.2.0'
-    pod 'Nimble', '~> 8.0.7'
+    pod 'Quick'
+    pod 'Nimble'
   end
 end
