@@ -41,6 +41,50 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="3BG-1R-2lq">
+                                        <rect key="frame" x="0.0" y="87.5" width="375" height="43"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3BG-1R-2lq" id="32M-gb-Q4i">
+                                            <rect key="frame" x="0.0" y="0.0" width="350.5" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UnionObserver" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EAq-Jn-VUN">
+                                                    <rect key="frame" x="36" y="11" width="286.5" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="EAq-Jn-VUN" firstAttribute="top" secondItem="32M-gb-Q4i" secondAttribute="topMargin" id="Bgy-L9-g16"/>
+                                                <constraint firstItem="EAq-Jn-VUN" firstAttribute="leading" secondItem="32M-gb-Q4i" secondAttribute="leadingMargin" constant="20" id="EIZ-nK-fXu"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="EAq-Jn-VUN" secondAttribute="trailing" constant="20" id="XRv-dM-N39"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="EAq-Jn-VUN" secondAttribute="bottom" id="gz4-ir-cgc"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="lUc-hd-XKE">
+                                        <rect key="frame" x="0.0" y="130.5" width="375" height="43"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lUc-hd-XKE" id="eEL-1Q-hFJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="350.5" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DistinctObserver" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M0r-LG-G71">
+                                                    <rect key="frame" x="36" y="11" width="286.5" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="M0r-LG-G71" firstAttribute="leading" secondItem="eEL-1Q-hFJ" secondAttribute="leadingMargin" constant="20" id="7rN-gT-TPl"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="M0r-LG-G71" secondAttribute="trailing" constant="20" id="9VP-ac-kbe"/>
+                                                <constraint firstItem="M0r-LG-G71" firstAttribute="top" secondItem="eEL-1Q-hFJ" secondAttribute="topMargin" id="nLN-GT-2kr"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="M0r-LG-G71" secondAttribute="bottom" id="plF-kb-Joq"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>

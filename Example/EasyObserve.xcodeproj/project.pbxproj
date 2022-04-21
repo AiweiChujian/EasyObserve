@@ -17,6 +17,9 @@
 		DB3F55B0280E974900C1180E /* ObserverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3F55AE280E974900C1180E /* ObserverVC.swift */; };
 		DB3F55B1280E974900C1180E /* ObserverVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB3F55AF280E974900C1180E /* ObserverVC.xib */; };
 		DB3F55B3280EA24800C1180E /* RootTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3F55B2280EA24800C1180E /* RootTableViewController.swift */; };
+		DBD1A9A92811297E0018C4B3 /* UnionObserverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1A9A82811297E0018C4B3 /* UnionObserverVC.swift */; };
+		DBD1A9AC28112D240018C4B3 /* DistinctObserverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1A9AB28112D240018C4B3 /* DistinctObserverVC.swift */; };
+		DBD1A9B2281130D30018C4B3 /* UnionObserverVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBD1A9B1281130D30018C4B3 /* UnionObserverVC.xib */; };
 		DBD6DE8F2809764A00668742 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD6DE8E2809764A00668742 /* UserModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +54,9 @@
 		DB3F55AE280E974900C1180E /* ObserverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverVC.swift; sourceTree = "<group>"; };
 		DB3F55AF280E974900C1180E /* ObserverVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ObserverVC.xib; sourceTree = "<group>"; };
 		DB3F55B2280EA24800C1180E /* RootTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTableViewController.swift; sourceTree = "<group>"; };
+		DBD1A9A82811297E0018C4B3 /* UnionObserverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnionObserverVC.swift; sourceTree = "<group>"; };
+		DBD1A9AB28112D240018C4B3 /* DistinctObserverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistinctObserverVC.swift; sourceTree = "<group>"; };
+		DBD1A9B1281130D30018C4B3 /* UnionObserverVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnionObserverVC.xib; sourceTree = "<group>"; };
 		DBD6DE8E2809764A00668742 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		E4B3B3881E728BC3C005B688 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -110,7 +116,7 @@
 		607FACD21AFB9204008FA782 /* Example for EasyObserve */ = {
 			isa = PBXGroup;
 			children = (
-				DB3F55B4280EA38C00C1180E /* ObserveExample */,
+				DBD1A9AA2811298F0018C4B3 /* ObserveExample */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				DB3F55B2280EA24800C1180E /* RootTableViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
@@ -166,14 +172,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		DB3F55B4280EA38C00C1180E /* ObserveExample */ = {
+		DBD1A9AA2811298F0018C4B3 /* ObserveExample */ = {
 			isa = PBXGroup;
 			children = (
 				DBD6DE8E2809764A00668742 /* UserModel.swift */,
 				DB3F55AE280E974900C1180E /* ObserverVC.swift */,
 				DB3F55AF280E974900C1180E /* ObserverVC.xib */,
+				DBD1A9A82811297E0018C4B3 /* UnionObserverVC.swift */,
+				DBD1A9B1281130D30018C4B3 /* UnionObserverVC.xib */,
+				DBD1A9AB28112D240018C4B3 /* DistinctObserverVC.swift */,
 			);
-			name = ObserveExample;
+			path = ObserveExample;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,6 +278,7 @@
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				DB3F55B1280E974900C1180E /* ObserverVC.xib in Resources */,
+				DBD1A9B2281130D30018C4B3 /* UnionObserverVC.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -372,7 +382,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBD1A9AC28112D240018C4B3 /* DistinctObserverVC.swift in Sources */,
 				DBD6DE8F2809764A00668742 /* UserModel.swift in Sources */,
+				DBD1A9A92811297E0018C4B3 /* UnionObserverVC.swift in Sources */,
 				DB3F55B0280E974900C1180E /* ObserverVC.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				DB3F55B3280EA24800C1180E /* RootTableViewController.swift in Sources */,

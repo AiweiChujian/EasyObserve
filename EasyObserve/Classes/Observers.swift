@@ -19,6 +19,8 @@ public class Observer {
 
 //MARK: - UnionObserver
 public class UnionObserver {
+    public init() {}
+    
     private var observerList: [Observer]? = []
     
     public var count: Int { observerList?.count ?? 0 }
@@ -43,6 +45,8 @@ extension UnionObserver {
 
 //MARK: - DistinctObserver
 public class DistinctObserver<T> {
+    public init() {}
+    
     private var observerMap: [PartialKeyPath<T>: Observer]? = [:]
     
     public var count: Int { observerMap?.count ?? 0 }

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import EasyObserve
 
 class ObserverVC: UIViewController {
     
@@ -34,10 +34,34 @@ class ObserverVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindSubviews()
+    }
+    
+    private var nameObserver: Observer?
+    private var genderObserver: Observer?
+    private var ageObserver: Observer?
+    
+    
+    func bindSubviews() {
+        nameObserver = user.$name.observe(subscriber: {[unowned self] value, change, option in
+            self.title = value
+            self.nameLabel.text = value
+            self.nameTextField.text = value
+        })
+        
+        genderObserver = user.$gender.observe(subscriber: {[unowned self] value, change, option in
+            self.genderLabel.text = value.showText
+            self.genderSegment.selectedSegmentIndex = (value == .male) ? 0: 1
+        })
+        
+        ageObserver = user.$age.observe(subscriber: {[unowned self] value, change, option in
+            self.ageLabel.text = String(value)
+            self.ageSlider.value = Float(value)
+        })
     }
     
     @IBAction func changedName(_ sender: UITextField) {
-        user.name = (sender.text?.isEmpty == false) ? sender.text! : "<未知>"
+        user.name = sender.text ?? ""
     }
     
     @IBAction func changedGender(_ sender: UISegmentedControl) {
@@ -50,6 +74,13 @@ class ObserverVC: UIViewController {
     
     @IBAction func removeObserve(_ sender: UIButton) {
         
+//        nameObserver?.invalidate()
+//        genderObserver?.invalidate()
+//        ageObserver?.invalidate()
+        
+        nameObserver = nil
+        genderObserver = nil
+        ageObserver = nil
     }
 }
 
