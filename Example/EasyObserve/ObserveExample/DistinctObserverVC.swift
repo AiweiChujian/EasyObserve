@@ -61,7 +61,7 @@ extension DistinctObserverVC {
             })
             
             // DistinctObserver 管理 CombineObserver, 选择其中一个属性的 keyPath 作为下标即可
-            distinctObserver[\.gender] -= (user.$gender & user.$age).combineObserve(subscriber: { [unowned self] value in
+            distinctObserver[\.gender] -= (user.$gender & user.$age).combineObserve(subscriber: { [unowned self] value, _ in
                 self.detailTextLabel?.text = "\(value.0.showText) - \(value.1)"
             })
         }

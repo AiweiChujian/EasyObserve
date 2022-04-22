@@ -135,7 +135,7 @@ distinctObserver[\.age] -= user.$age.observe(options: [.new], subscriber: {[unow
 ```swift
 var combineObserver: Observer?
 
-combineObserver = (user.$name & user.$gender & user.$age).combineObserve(subscriber: { [unowned self] value in
+combineObserver = (user.$name & user.$gender & user.$age).combineObserve(subscriber: { [unowned self] value, option in
     /* 订阅代码 */
 })
 ```

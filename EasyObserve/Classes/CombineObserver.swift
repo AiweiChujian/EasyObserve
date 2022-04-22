@@ -11,13 +11,13 @@ protocol CombineObserverType: AnyObject{
     func sendValue(for option: ObserveOptions)
 }
 
-public typealias CombineSubscriber<Value> = (_ value: Value) -> Void
+public typealias CombineSubscriber<Value> = (_ value: Value, _ option: ObserveOptions) -> Void
 
 public class CombineObserver<CombineValue>: CombineObserverType {
     
     fileprivate var options = ObserveOptions([])
     
-    fileprivate var subscriber: CombineSubscriber<CombineValue> = {_ in }
+    fileprivate var subscriber: CombineSubscriber<CombineValue> = {_, _ in }
     
     func sendValue(for option: ObserveOptions) {}
     
@@ -51,7 +51,7 @@ public class CombineObserver2<V1, V2>: CombineObserver<(V1, V2)> {
         guard options.contains(option) else {
             return
         }
-        subscriber((scheduler1.lastValue, scheduler2.lastValue))
+        subscriber((scheduler1.lastValue, scheduler2.lastValue), option)
     }
 }
 
@@ -80,7 +80,7 @@ public class CombineObserver3<V1, V2, V3>: CombineObserver<(V1, V2, V3)> {
         guard options.contains(option) else {
             return
         }
-        subscriber((scheduler1.lastValue, scheduler2.lastValue, scheduler3.lastValue))
+        subscriber((scheduler1.lastValue, scheduler2.lastValue, scheduler3.lastValue), option)
     }
 }
 
@@ -114,7 +114,7 @@ public class CombineObserver4<V1, V2, V3, V4>: CombineObserver<(V1, V2, V3, V4)>
         guard options.contains(option) else {
             return
         }
-        subscriber((scheduler1.lastValue, scheduler2.lastValue, scheduler3.lastValue, scheduler4.lastValue))
+        subscriber((scheduler1.lastValue, scheduler2.lastValue, scheduler3.lastValue, scheduler4.lastValue), option)
     }
 }
 
@@ -152,7 +152,7 @@ public class CombineObserver5<V1, V2, V3, V4, V5>: CombineObserver<(V1, V2, V3, 
         guard options.contains(option) else {
             return
         }
-        subscriber((scheduler1.lastValue, scheduler2.lastValue, scheduler3.lastValue, scheduler4.lastValue, scheduler5.lastValue))
+        subscriber((scheduler1.lastValue, scheduler2.lastValue, scheduler3.lastValue, scheduler4.lastValue, scheduler5.lastValue), option)
     }
 }
 
@@ -194,7 +194,7 @@ public class CombineObserver6<V1, V2, V3, V4, V5, V6>: CombineObserver<(V1, V2, 
         guard options.contains(option) else {
             return
         }
-        subscriber((scheduler1.lastValue, scheduler2.lastValue, scheduler3.lastValue, scheduler4.lastValue, scheduler5.lastValue, scheduler6.lastValue))
+        subscriber((scheduler1.lastValue, scheduler2.lastValue, scheduler3.lastValue, scheduler4.lastValue, scheduler5.lastValue, scheduler6.lastValue), option)
     }
 }
 
@@ -240,7 +240,7 @@ public class CombineObserver7<V1, V2, V3, V4, V5, V6, V7>: CombineObserver<(V1, 
         guard options.contains(option) else {
             return
         }
-        subscriber((scheduler1.lastValue, scheduler2.lastValue, scheduler3.lastValue, scheduler4.lastValue, scheduler5.lastValue, scheduler6.lastValue, scheduler7.lastValue))
+        subscriber((scheduler1.lastValue, scheduler2.lastValue, scheduler3.lastValue, scheduler4.lastValue, scheduler5.lastValue, scheduler6.lastValue, scheduler7.lastValue), option)
     }
 }
 
@@ -290,7 +290,7 @@ public class CombineObserver8<V1, V2, V3, V4, V5, V6, V7, V8>: CombineObserver<(
         guard options.contains(option) else {
             return
         }
-        subscriber((scheduler1.lastValue, scheduler2.lastValue, scheduler3.lastValue, scheduler4.lastValue, scheduler5.lastValue, scheduler6.lastValue, scheduler7.lastValue, scheduler8.lastValue))
+        subscriber((scheduler1.lastValue, scheduler2.lastValue, scheduler3.lastValue, scheduler4.lastValue, scheduler5.lastValue, scheduler6.lastValue, scheduler7.lastValue, scheduler8.lastValue), option)
     }
 }
 
