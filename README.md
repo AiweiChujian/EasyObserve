@@ -55,7 +55,7 @@ enum UserGender: Equatable {
 
 ### 2. Observer
 
-EasyObserver使用和系统闭包KVO相同的观察管理策略，即对属性观察后返回一个观察者对象，在观察者对象释放时，自动移除对应的观察。`Observable`包装的可观察属性通过其呈现值（`$+属性名`）添加观察：
+EasyObserver使用和系统闭包KVO相似的观察管理策略，即对属性观察后返回一个观察者对象，在观察者对象释放时，自动移除对应的观察。`@Observable`包装的可观察属性通过其呈现值（`$+属性名`）添加观察：
 
 ```swift
 var nameObserver: Observer?
