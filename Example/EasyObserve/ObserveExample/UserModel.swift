@@ -23,10 +23,6 @@ class UserModel: EasyObserve {
         self.gender = gender
         self.age = age
     }
-    
-//    deinit {
-//        print("user[\(name)] deinit")
-//    }
 }
 
 typealias UserModelObserver = DistinctObserver<UserModel>
