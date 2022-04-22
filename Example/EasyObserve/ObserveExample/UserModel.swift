@@ -17,7 +17,7 @@ class UserModel: EasyObserve {
     @Observable var name: String
     @Observable var gender: UserGender
     @Observable var age: Int
-    
+        
     init(name: String, gender: UserGender, age: Int) {
         self.name = name
         self.gender = gender
