@@ -53,8 +53,24 @@ public struct ObservableWrapper<T, Value> where T: AnyObject {
     public private(set) lazy var projectedValue = Scheduler<Value>(initialValue: storage)
 }
 
+@propertyWrapper
+public struct WeakWrapper<T, Value> where T: AnyObject, Value: AnyObject {
+    public private(set) weak var weakObj: Value?
+    
+    public var wrappedValue: Value? {
+        get { weakObj }
+        set { weakObj = newValue }
+    }
+    
+    public init(wrappedValue: Value?) {
+        weakObj = wrappedValue
+    }
+}
+
 public protocol EasyObserve: AnyObject {
     typealias Observable<Value>  = ObservableWrapper<Self, Value>
+    
+    typealias Weak<Value: AnyObject>  = WeakWrapper<Self, Value>
 }
 
 extension NSObject: EasyObserve {}
