@@ -26,10 +26,10 @@ pod 'EasyObserve'
 EasyObserve的使用和闭包KVO相似，相比于闭包KVO，主要解决了以下痛点：
 
 * NSObject的子类才能使用KVO（需要`@objc dynamic`修饰属性），而任意类类型都可以使用EasyObserve
-* 闭包KVO在对多个观察的管理和避免重复观察时很不方便，EasyObserve提供了[UnionObserver](#unionobserver) 和[DistinctObserver](#distinctobserver)来方便对观察的管理
-* KVO对多个值的合并观察需要引入一个中间值，再对中间值进行观察才能完成，EasyObserver可以通过[CombineObserver](#combineobserver)非常方便对多个值进行合并观察
+* 闭包KVO在对多个观察的管理和避免重复观察时很不方便，EasyObserve提供了[UnionObserver](#3-unionobserver) 和[DistinctObserver](#4-distinctobserver)来方便对观察的管理
+* KVO对多个值的合并观察需要引入一个中间值，再对中间值进行观察才能完成，EasyObserver可以通过[CombineObserver](#5-combineobserver)非常方便对多个值进行合并观察
 
-### Observable
+### 1. Observable
 
 通常只有类（引用类型）才具有被观察的意义，通过`@Observable`包装类的可观察属性：
 
@@ -53,7 +53,7 @@ enum UserGender: Equatable {
 }
 ```
 
-### Observer
+### 2. Observer
 
 EasyObserver使用和系统闭包KVO相同的观察管理策略，即对属性观察后返回一个观察者对象，在观察者对象释放时，自动移除对应的观察。`Observable`包装的可观察属性通过其呈现值（`$+属性名`）添加观察：
 
@@ -80,7 +80,7 @@ ageObserver = user.$age.observe(options: [.new], subscriber: {[unowned self] val
 
 > EasyObserve在添加观察时，支持`.inintial`和`.new`两种option
 
-### UnionObserver
+### 3. UnionObserver
 
 通常在每个Controller中会添加多个观察者，你可以通过`UnionObserver`和`+=`运算符来集中持有它们，上面的代码可以改为：
 
@@ -103,7 +103,7 @@ unionObserver += user.$age.observe(options: [.new], subscriber: {[unowned self] 
 })
 ```
 
-### DistinctObserver
+### 4. DistinctObserver
 
 向`UnionObserver`中添加的观察是**可以重复并存**的，在重复设值的场景中（如：UITableViewCell），往往希望对同一类型的同一属性的观察是不重复的，你可以通过`DistinctObserver`和`-=`运算符来完成：
 
@@ -128,7 +128,7 @@ distinctObserver[\.age] -= user.$age.observe(options: [.new], subscriber: {[unow
 })
 ```
 
-### CombineObserver
+### 5. CombineObserver
 
 很多时候我们需要对属性进行合并观察，EasyObserve提供了`&`运算符来创建CombineObserver，最多支持8个属性的合并观察，对更多值的合并观察，可以将观察结果写入到一个合并的值类型（元组、结构体、字典等）中，再对这个合并的中间值添加观察：
 
