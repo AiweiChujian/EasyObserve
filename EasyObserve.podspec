@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'EasyObserve'
-  s.version          = '1.0.0'
+  s.version          = '1.1.0'
   s.summary          = '简单、易用、轻量的 Swift 观察者模式'
 
 # This description is used to generate tags and improve search results.
