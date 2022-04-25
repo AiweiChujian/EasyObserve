@@ -22,7 +22,8 @@ public class CombineObserver<CombineValue>: CombineObserverType {
     func sendValue(for option: ObserveOptions) {}
     
     public func combineObserve(options: ObserveOptions = [.initial, .new], subscriber: @escaping CombineSubscriber<CombineValue>) -> Observer {
-        guard options.isVaild else {
+        guard options.isCombineVaild else {
+            assertionFailure("invalid combine observe options")
             return Observer(nil)
         }
         self.options = options

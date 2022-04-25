@@ -11,7 +11,11 @@ import UIKit
 public struct ObserveOptions: OptionSet {
     public static let initial = ObserveOptions(rawValue: 1 << 0)
     
-    public static let new = ObserveOptions(rawValue: 1 << 1)
+    public static let prior = ObserveOptions(rawValue: 1 << 1)
+    
+    public static let new = ObserveOptions(rawValue: 1 << 2)
+    
+    public static let `defer` = ObserveOptions(rawValue: 1 << 3)
         
     public let rawValue: Int
     
@@ -20,14 +24,25 @@ public struct ObserveOptions: OptionSet {
     }
     
     public var isVaild: Bool {
-        self.intersection([.new, .initial]) != ObserveOptions([])
+        self.intersection([.initial, .prior, .new, .defer]) != ObserveOptions([])
+    }
+    
+    public var isCombineVaild: Bool {
+        // 合并观察时仅支持 .initial 和 .new
+        let validOptions: ObserveOptions = [.initial, .new]
+        return (self.intersection(validOptions) != ObserveOptions([])) && (self.symmetricDifference(validOptions) == ObserveOptions([]))
     }
 }
 
-public struct Change<Value> {
-    public var oldValue: Value
+public class Change<Value> {
+    public let oldValue: Value
     
     public var newValue: Value
+    
+    fileprivate init(oldValue: Value, newValue: Value) {
+        self.oldValue = oldValue
+        self.newValue = newValue
+    }
 }
 
 public typealias Subscriber<Value> = (_ value: Value, _ change: Change<Value>, _ option: ObserveOptions) -> Void
@@ -41,8 +56,9 @@ public struct ObservableWrapper<T, Value> where T: AnyObject {
         get { storage }
         set {
             let change = Change<Value>(oldValue: storage, newValue: newValue)
-            storage = newValue
-            projectedValue.notify(newValue: newValue, change: change)
+            projectedValue.notify(change: change, option: .prior)
+            storage = change.newValue
+            projectedValue.notify(change: change, option: .new)
         }
     }
     
@@ -113,6 +129,7 @@ public class Scheduler<Value> {
     
     public func observe(options: ObserveOptions = [.initial, .new], subscriber: @escaping Subscriber<Value>) -> Observer {
         guard options.isVaild else {
+            assertionFailure("invalid observe options")
             return Observer(nil)
         }
         let observerObj = ObserverObj(options, subscriber)
@@ -140,22 +157,44 @@ public class Scheduler<Value> {
         combineOBList = combineOBList.filter({ $0.observer !== observer })
     }
     
+    private var isNotifying = false
+    
     /// Nofity
-    func notify(newValue: Value, change: Change<Value>) {
-        lastValue = newValue
+    func notify(change: Change<Value>, option: ObserveOptions) {
+        guard !isNotifying else {
+            assertionFailure("There is a cycle of observe.")
+            return
+        }
+        isNotifying = true
+        defer {
+            isNotifying = false
+            if option == .new {
+                notify(change: change, option: .defer)
+            }
+        }
+        
         observerList = observerList.compactMap({ weakRef in
             guard let observer = weakRef.observer else {
                 return nil
             }
-            observer.send(value: newValue, change: change, for: .new)
+            if option == .prior {
+                observer.send(value: change.newValue, change: change, for: option)
+            } else {
+                // 确保非 .prior 时, 订阅中对 change 的修改不会被传递
+                let sendChange =  Change(oldValue: change.newValue, newValue: change.oldValue)
+                observer.send(value: change.newValue, change: sendChange, for: option)
+            }
             return weakRef
         })
         
+        lastValue = change.newValue
+        
+        guard option == .new else { return}
         combineOBList = combineOBList.compactMap({ weakRef in
             guard let observer = weakRef.observer as? CombineObserverType else {
                 return nil
             }
-            observer.sendValue(for: .new)
+            observer.sendValue(for: option)
             return weakRef
         })
     }

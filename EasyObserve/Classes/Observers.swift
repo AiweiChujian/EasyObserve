@@ -15,6 +15,12 @@ public class Observer {
     init(_ singleObserver: AnyObject?) {
         self.singleObserver = singleObserver
     }
+    
+    public static func bind<T: AnyObject, Value>(_ object: T, _ keyPath: WritableKeyPath<T, Value>, _ scheduler: Scheduler<Value>) -> Observer {
+        scheduler.observe {[weak object] value, change, option in
+            object?[keyPath: keyPath] = value
+        }
+    }
 }
 
 //MARK: - UnionObserver
@@ -68,18 +74,9 @@ public class DistinctObserver<T> {
 }
 
 extension DistinctObserver {
-    public struct KeyPathHandle {
-        public static func -= (left: KeyPathHandle, right: Observer) {
-            left.observer?.observerMap?[left.keyPath] = right
-        }
-        
-        let keyPath: PartialKeyPath<T>
-        
-        private(set) weak var observer: DistinctObserver?
-    }
-    
-    public subscript<Value>(keyPath: KeyPath<T, Value>) -> KeyPathHandle {
-        KeyPathHandle(keyPath: keyPath, observer: self)
+    public subscript<Value>(keyPath: KeyPath<T, Value>) -> Observer? {
+        get { observerMap?[keyPath]}
+        set { observerMap?[keyPath] = newValue }
     }
 }
 

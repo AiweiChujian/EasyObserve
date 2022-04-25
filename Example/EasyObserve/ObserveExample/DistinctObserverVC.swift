@@ -56,12 +56,12 @@ extension DistinctObserverVC {
             // DistinctObserver 中一个 keyPath 对应一个观察者, 不用手动移除对上一个 model 的观察
 //            distinctObserver.removeAll()
             
-            distinctObserver[\.name] -= user.$name.observe(subscriber: {[unowned self] value, change, option in
+            distinctObserver[\.name] = user.$name.observe(subscriber: {[unowned self] value, change, option in
                 self.textLabel?.text = value
             })
             
             // DistinctObserver 管理 CombineObserver, 选择其中一个属性的 keyPath 作为下标即可
-            distinctObserver[\.gender] -= (user.$gender & user.$age).combineObserve(subscriber: { [unowned self] value, _ in
+            distinctObserver[\.gender] = (user.$gender & user.$age).combineObserve(subscriber: { [unowned self] value, _ in
                 self.detailTextLabel?.text = "\(value.0.showText) - \(value.1)"
             })
         }

@@ -113,17 +113,17 @@ typealias UserModelObserver = DistinctObserver<UserModel>
 let distinctObserver = UserModelObserver()
 
 // 默认为 [.initial, .new]
-distinctObserver[\.name] -= user.$name.observe(subscriber: {[unowned self] value, change, option in
+distinctObserver[\.name] = user.$name.observe(subscriber: {[unowned self] value, change, option in
     /* 订阅代码 */
 })
 
 // initial
-distinctObserver[\.gender] -= user.$gender.observe(options: [.initial], subscriber: {[unowned self] value, change, option in
+distinctObserver[\.gender] = user.$gender.observe(options: [.initial], subscriber: {[unowned self] value, change, option in
     /* 订阅代码 */
 })
 
 // new
-distinctObserver[\.age] -= user.$age.observe(options: [.new], subscriber: {[unowned self] value, change, option in
+distinctObserver[\.age] = user.$age.observe(options: [.new], subscriber: {[unowned self] value, change, option in
     /* 订阅代码 */
 })
 ```
