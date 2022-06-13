@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 public struct ObserveOptions: OptionSet {
     public static let initial = ObserveOptions(rawValue: 1 << 0)
@@ -59,6 +58,7 @@ public struct ObservableWrapper<T, Value> where T: AnyObject {
             projectedValue.notify(change: change, option: .prior)
             storage = change.newValue
             projectedValue.notify(change: change, option: .new)
+            projectedValue.notify(change: change, option: .defer)
         }
     }
     
@@ -168,9 +168,6 @@ public class Scheduler<Value> {
         isNotifying = true
         defer {
             isNotifying = false
-            if option == .new {
-                notify(change: change, option: .defer)
-            }
         }
         
         observerList = observerList.compactMap({ weakRef in
@@ -189,6 +186,7 @@ public class Scheduler<Value> {
         
         lastValue = change.newValue
         
+        // 通知合并观察者
         guard option == .new else { return}
         combineOBList = combineOBList.compactMap({ weakRef in
             guard let observer = weakRef.observer as? CombineObserverType else {

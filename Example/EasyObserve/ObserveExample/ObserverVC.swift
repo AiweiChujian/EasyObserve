@@ -58,6 +58,7 @@ class ObserverVC: UIViewController {
             self.ageLabel.text = String(value)
             self.ageSlider.value = Float(value)
         })
+        
     }
     
     @IBAction func changedName(_ sender: UITextField) {

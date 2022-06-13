@@ -17,6 +17,7 @@
 		DB3F55B0280E974900C1180E /* ObserverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3F55AE280E974900C1180E /* ObserverVC.swift */; };
 		DB3F55B1280E974900C1180E /* ObserverVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB3F55AF280E974900C1180E /* ObserverVC.xib */; };
 		DB3F55B3280EA24800C1180E /* RootTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3F55B2280EA24800C1180E /* RootTableViewController.swift */; };
+		DB42AB492812FE3C008A4703 /* Noticeboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB42AB482812FE3C008A4703 /* Noticeboard.swift */; };
 		DBD1A9A92811297E0018C4B3 /* UnionObserverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1A9A82811297E0018C4B3 /* UnionObserverVC.swift */; };
 		DBD1A9AC28112D240018C4B3 /* DistinctObserverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1A9AB28112D240018C4B3 /* DistinctObserverVC.swift */; };
 		DBD1A9B2281130D30018C4B3 /* UnionObserverVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBD1A9B1281130D30018C4B3 /* UnionObserverVC.xib */; };
@@ -54,6 +55,7 @@
 		DB3F55AE280E974900C1180E /* ObserverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverVC.swift; sourceTree = "<group>"; };
 		DB3F55AF280E974900C1180E /* ObserverVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ObserverVC.xib; sourceTree = "<group>"; };
 		DB3F55B2280EA24800C1180E /* RootTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTableViewController.swift; sourceTree = "<group>"; };
+		DB42AB482812FE3C008A4703 /* Noticeboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Noticeboard.swift; sourceTree = "<group>"; };
 		DBD1A9A82811297E0018C4B3 /* UnionObserverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnionObserverVC.swift; sourceTree = "<group>"; };
 		DBD1A9AB28112D240018C4B3 /* DistinctObserverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistinctObserverVC.swift; sourceTree = "<group>"; };
 		DBD1A9B1281130D30018C4B3 /* UnionObserverVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnionObserverVC.xib; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				DBD1A9A82811297E0018C4B3 /* UnionObserverVC.swift */,
 				DBD1A9B1281130D30018C4B3 /* UnionObserverVC.xib */,
 				DBD1A9AB28112D240018C4B3 /* DistinctObserverVC.swift */,
+				DB42AB482812FE3C008A4703 /* Noticeboard.swift */,
 			);
 			path = ObserveExample;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 				DBD1A9AC28112D240018C4B3 /* DistinctObserverVC.swift in Sources */,
 				DBD6DE8F2809764A00668742 /* UserModel.swift in Sources */,
 				DBD1A9A92811297E0018C4B3 /* UnionObserverVC.swift in Sources */,
+				DB42AB492812FE3C008A4703 /* Noticeboard.swift in Sources */,
 				DB3F55B0280E974900C1180E /* ObserverVC.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				DB3F55B3280EA24800C1180E /* RootTableViewController.swift in Sources */,
