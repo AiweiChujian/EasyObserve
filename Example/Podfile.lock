@@ -1,5 +1,10 @@
 PODS:
-  - EasyObserve (1.0.0)
+  - EasyObserve (1.2.0):
+    - EasyObserve/Foundation (= 1.2.0)
+    - EasyObserve/UIKit (= 1.2.0)
+  - EasyObserve/Foundation (1.2.0)
+  - EasyObserve/UIKit (1.2.0):
+    - EasyObserve/Foundation
   - Nimble (9.2.1)
   - Quick (4.0.0)
 
@@ -18,7 +23,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  EasyObserve: f1c183a95ea42b04ac9edb43564595c7f0af80d7
+  EasyObserve: 0f4e21400157b228250bc11730e6664b040bb60c
   Nimble: e7e615c0335ee4bf5b0d786685451e62746117d5
   Quick: 6473349e43b9271a8d43839d9ba1c442ed1b7ac4
 

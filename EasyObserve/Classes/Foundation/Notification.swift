@@ -50,3 +50,18 @@ extension EasyNotificationObserver: ObserverType {
         center?.removeObserver(handle as Any)
     }
 }
+
+//MARK: - NotificationCenter
+extension NotificationCenter: EZNamespace {}
+
+fileprivate extension NotificationCenter {
+    func easyObserver(forName name: NSNotification.Name?, object obj: Any?, queue: OperationQueue?, using block: @escaping (Notification) -> Void) -> EasyNotificationObserver {
+        EasyNotificationObserver(center: self, handle: addObserver(forName: name, object: obj, queue: queue, using: block))
+    }
+}
+
+public extension EZExtension where T == NotificationCenter {
+    func addObserver(forName name: NSNotification.Name?, object obj: Any?, queue: OperationQueue?, using block: @escaping (Notification) -> Void) -> EasyNotificationObserver {
+        this.easyObserver(forName: name, object: obj, queue: queue, using: block)
+    }
+}

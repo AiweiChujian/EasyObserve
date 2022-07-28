@@ -28,14 +28,14 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '11.0'
   
   s.swift_versions = '5.0'
-
-  s.source_files = 'EasyObserve/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'EasyObserve' => ['EasyObserve/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.subspec 'Foundation' do |ss|
+      ss.source_files = 'EasyObserve/Classes/Foundation/**/*'
+  end
+  
+  s.subspec 'UIKit' do |ss|
+      ss.ios.deployment_target = '10.0'
+      ss.source_files = 'EasyObserve/Classes/UIKit/**/*'
+      ss.dependency 'EasyObserve/Foundation'
+  end
 end

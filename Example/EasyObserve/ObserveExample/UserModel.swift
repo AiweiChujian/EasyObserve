@@ -13,7 +13,7 @@ enum UserGender: Equatable {
     case male, female
 }
 
-class UserModel: EasyObserve {
+class UserModel: EasyObserved {
     @Observable var name: String
     @Observable var gender: UserGender
     @Observable var age: Int

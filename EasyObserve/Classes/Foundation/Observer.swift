@@ -1,5 +1,5 @@
 //
-//  Observers.swift
+//  Observer.swift
 //  EasyObserve
 //
 //  Created by Aiwei on 2022/4/15.
@@ -26,11 +26,11 @@ public class Observer {
 public class UnionObserver {
     public init() {}
     
-    private var observerList: [Observer]? = []
+    private var observerList: [ObserverType]? = []
     
     public var count: Int { observerList?.count ?? 0 }
     
-    public func removeObserve(observer: Observer) -> Observer? {
+    public func removeObserve(observer: ObserverType) -> ObserverType? {
         guard let index = observerList?.firstIndex(where: {$0 === observer }) else {
             return nil
         }
@@ -43,7 +43,7 @@ public class UnionObserver {
 }
 
 extension UnionObserver {
-    public static func += (left: UnionObserver, right: Observer) {
+    public static func += (left: UnionObserver, right: ObserverType) {
         left.observerList?.append(right)
     }
 }
@@ -52,15 +52,15 @@ extension UnionObserver {
 public class DistinctObserver<T> {
     public init() {}
     
-    private var observerMap: [PartialKeyPath<T>: Observer]? = [:]
+    private var observerMap: [PartialKeyPath<T>: ObserverType]? = [:]
     
     public var count: Int { observerMap?.count ?? 0 }
     
-    public func removeObserve<Value>(keyPath: KeyPath<T, Value>) -> Observer? {
+    public func removeObserve<Value>(keyPath: KeyPath<T, Value>) -> ObserverType? {
         observerMap?.removeValue(forKey: keyPath)
     }
     
-    public func removeObserve(observer: Observer) -> Observer? {
+    public func removeObserve(observer: ObserverType) -> ObserverType? {
         guard let index = observerMap?.firstIndex(where: {$0.value === observer }) else {
             return nil
         }
@@ -73,7 +73,7 @@ public class DistinctObserver<T> {
 }
 
 extension DistinctObserver {
-    public subscript<Value>(keyPath: KeyPath<T, Value>) -> Observer? {
+    public subscript<Value>(keyPath: KeyPath<T, Value>) -> ObserverType? {
         get { observerMap?[keyPath]}
         set { observerMap?[keyPath] = newValue }
     }

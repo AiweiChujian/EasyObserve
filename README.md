@@ -36,7 +36,7 @@ EasyObserve的使用和闭包KVO相似，相比于闭包KVO，主要解决了以
 ```swift
 import EasyObserve
 
-class UserModel: EasyObserve {
+class UserModel: EasyObserved {
     @Observable var name: String
     @Observable var gender: UserGender
     @Observable var age: Int

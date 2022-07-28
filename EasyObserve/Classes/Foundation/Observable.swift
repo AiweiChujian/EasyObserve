@@ -83,14 +83,6 @@ public struct WeakWrapper<T, Value> where T: AnyObject, Value: AnyObject {
     }
 }
 
-public protocol EasyObserve: AnyObject {
-    typealias Observable<Value>  = ObservableWrapper<Self, Value>
-    
-    typealias Weak<Value: AnyObject>  = WeakWrapper<Self, Value>
-}
-
-extension NSObject: EasyObserve {}
-
 //MARK: - SingleObserver
 class SingleObserver<Value> {
     private var options: ObserveOptions
