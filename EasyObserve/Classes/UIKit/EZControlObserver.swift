@@ -1,5 +1,5 @@
 //
-//  UIControlObserver.swift
+//  EZControlObserver.swift
 //  EasyObserve
 //
 //  Created by Aiwei on 2022/7/28.
