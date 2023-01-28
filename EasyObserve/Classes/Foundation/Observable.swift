@@ -48,7 +48,7 @@ public typealias Subscriber<Value> = (_ value: Value, _ change: Change<Value>, _
 
 //MARK: - Observable
 @propertyWrapper
-public struct ObservableWrapper<T, Value> where T: AnyObject {
+public class ObservableWrapper<T, Value> where T: AnyObject {
     private var storage: Value
     
     public var wrappedValue: Value {
@@ -70,7 +70,7 @@ public struct ObservableWrapper<T, Value> where T: AnyObject {
 }
 
 @propertyWrapper
-public struct WeakWrapper<T, Value> where T: AnyObject, Value: AnyObject {
+public class WeakWrapper<T, Value> where T: AnyObject, Value: AnyObject {
     public private(set) weak var weakObj: Value?
     
     public var wrappedValue: Value? {

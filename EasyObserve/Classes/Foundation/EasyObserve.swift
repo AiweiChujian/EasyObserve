@@ -21,11 +21,11 @@ public protocol EasyObserving: EZNamespace, AnyObject {}
 
 extension EasyObserving {
     fileprivate var observingTable: UnionObserver {
-        if let table = objc_getAssociatedObject(self, &unionObserverKey) as? UnionObserver {
+        if let table = objc_getAssociatedObject(self, &observingTableKey) as? UnionObserver {
             return table
         } else {
             let table = UnionObserver()
-            objc_setAssociatedObject(self, &unionObserverKey, table, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &observingTableKey, table, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             return table
         }
     }
@@ -35,7 +35,7 @@ extension EasyObserving {
     }
 }
 
-private var unionObserverKey: UInt8 = 0
+private var observingTableKey: UInt8 = 0
 
 extension EZExtension where T: EasyObserving {
     public var observingTable: UnionObserver {
