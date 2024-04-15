@@ -1,6 +1,6 @@
 //
 //  EasyScheduler.swift
-//  KXYZKit
+//  EasyObserve
 //
 //  Created by Aiwei on 2024/4/15.
 //
