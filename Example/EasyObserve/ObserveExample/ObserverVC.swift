@@ -9,6 +9,7 @@
 import UIKit
 import EasyObserve
 
+
 class ObserverVC: UIViewController {
     
     @IBOutlet weak var nameLabel: UILabel!
@@ -37,9 +38,9 @@ class ObserverVC: UIViewController {
         bindSubviews()
     }
     
-    private var nameObserver: Observer?
-    private var genderObserver: Observer?
-    private var ageObserver: Observer?
+    private var nameObserver: EasyObserver?
+    private var genderObserver: EasyObserver?
+    private var ageObserver: EasyObserver?
     
     
     func bindSubviews() {

@@ -1,27 +1,33 @@
 //
 //  EasyNotification.swift
-//  KuaiYin
+//  KXYZKit
 //
-//  Created by Aiwei on 2022/5/6.
-//  Copyright © 2022 CocoaPods. All rights reserved.
+//  Created by Aiwei on 2024/4/15.
 //
 
 import Foundation
 
-fileprivate let EasyNotificationUserInfoKey = "EasyNotificationUserInfoKey"
-
 public class EasyNotification<UserInfoType> {
-    private lazy var name: NSNotification.Name = {
-        Notification.Name("\(type(of: self))-\(Unmanaged.passUnretained(self).toOpaque())")
-    }()
+    public private(set) var info: UserInfoType
     
-    public func post(_ userInfo: UserInfoType, via center: NotificationCenter = .default) {
-        center.post(name: name, object: self, userInfo: [EasyNotificationUserInfoKey: userInfo])
+    private var name: NSNotification.Name!
+    
+    public init(_ value: UserInfoType) {
+        self.info = value
+        self.name = Notification.Name("\(type(of: self))-\(Unmanaged.passUnretained(self).toOpaque())")
     }
     
-    public func addObserver(from center: NotificationCenter = .default, queue: OperationQueue? = nil, using block: @escaping (Notification, UserInfoType)-> Void) -> EasyNotificationObserver {
+    private let userInfoKey =  "com.easyNotification.kUserInfo"
+    
+    public func post(_ userInfo: UserInfoType, via center: NotificationCenter = .default) {
+        info = userInfo
+        center.post(name: name, object: self, userInfo: [userInfoKey: userInfo])
+    }
+    
+    public func addObserver(from center: NotificationCenter = .default, queue: OperationQueue?, using block: @escaping (Notification, UserInfoType)-> Void) -> EasyNotificationObserver {
+        let userInfoKey = userInfoKey
         let handle = center.addObserver(forName: name, object: self, queue: queue) { notification in
-            guard let userInfo = notification.userInfo?[EasyNotificationUserInfoKey] as? UserInfoType else {
+            guard let userInfo = notification.userInfo?[userInfoKey] as? UserInfoType else {
                 return
             }
             block(notification, userInfo)
@@ -45,14 +51,14 @@ public class EasyNotificationObserver {
     }
 }
 
-extension EasyNotificationObserver: ObserverType {
+extension EasyNotificationObserver: EasyObserverType {
     public func invalidate() {
         center?.removeObserver(handle as Any)
     }
 }
 
 //MARK: - NotificationCenter
-extension NotificationCenter: EZNamespace {}
+extension NotificationCenter: EasyNamespace {}
 
 fileprivate extension NotificationCenter {
     func easyObserver(forName name: NSNotification.Name?, object obj: Any?, queue: OperationQueue?, using block: @escaping (Notification) -> Void) -> EasyNotificationObserver {
@@ -60,8 +66,8 @@ fileprivate extension NotificationCenter {
     }
 }
 
-public extension EZExtension where T == NotificationCenter {
-    func addObserver(forName name: NSNotification.Name?, object obj: Any?, queue: OperationQueue?, using block: @escaping (Notification) -> Void) -> EasyNotificationObserver {
+public extension EasyExtension where T == NotificationCenter {
+    func addObserver(forName name: NSNotification.Name?, queue: OperationQueue?, object obj: Any? = nil, using block: @escaping (Notification) -> Void) -> EasyNotificationObserver {
         this.easyObserver(forName: name, object: obj, queue: queue, using: block)
     }
 }

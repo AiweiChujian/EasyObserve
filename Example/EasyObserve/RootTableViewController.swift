@@ -19,9 +19,9 @@ class RootTableViewController: UITableViewController {
         case (0, 0):
             navigationController?.pushViewController(ObserverVC(), animated: true)
         case (0, 1):
-            navigationController?.pushViewController(UnionObserverVC(), animated: true)
+            navigationController?.pushViewController(ObserverBagVC(), animated: true)
         case (0, 2):
-            navigationController?.pushViewController(DistinctObserverVC(), animated: true)
+            navigationController?.pushViewController(ObserverMapVC(), animated: true)
         default:
             break
         }

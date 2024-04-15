@@ -1,54 +1,53 @@
 //
 //  EasyObserve.swift
-//  EasyObserve
+//  KXYZKit
 //
-//  Created by Aiwei on 2022/7/28.
+//  Created by Aiwei on 2024/4/15.
 //
 
 import Foundation
 
-public typealias EasyObserve = EasyObserved & EasyObserving
-
-//MARK: - Observed
+// MARK: - EasyObserved
+@MainActor
 public protocol EasyObserved: AnyObject {
-    typealias Observable<Value>  = ObservableWrapper<Self, Value>
+    typealias EasyObservable<Value>  = EasyObservableWrapper<Self, Value>
     
-    typealias Weak<Value: AnyObject>  = WeakWrapper<Self, Value>
+    typealias EasyObservableWeak<Value: AnyObject>  = EasyObservableWeakWrapper<Self, Value>
 }
 
-//MARK: - Observing
-public protocol EasyObserving: EZNamespace, AnyObject {}
+// MARK: - EasyObserving
+@MainActor
+public protocol EasyObserving: EasyNamespace, AnyObject {}
 
 extension EasyObserving {
-    fileprivate var observingTable: UnionObserver {
-        if let table = objc_getAssociatedObject(self, &observingTableKey) as? UnionObserver {
+    fileprivate var observerBag: EasyObserverBag {
+        if let table = objc_getAssociatedObject(self, &observingTableKey) as? EasyObserverBag {
             return table
         } else {
-            let table = UnionObserver()
+            let table = EasyObserverBag()
             objc_setAssociatedObject(self, &observingTableKey, table, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             return table
         }
     }
     
-    fileprivate func cleanObservingTable() {
-        observingTable.removeAll()
+    fileprivate func cleanObseverBag() {
+        observerBag.removeAll()
     }
 }
 
 private var observingTableKey: UInt8 = 0
 
-extension EZExtension where T: EasyObserving {
-    public var observingTable: UnionObserver {
-        this.observingTable
+extension EasyExtension where T: EasyObserving {
+    @MainActor
+    public var observerBag: EasyObserverBag {
+        this.observerBag
     }
     
-    public func cleanObservingTable() {
-        this.cleanObservingTable()
+    @MainActor
+    public func cleanObseverBag() {
+        this.cleanObseverBag()
     }
 }
 
-extension ObserverType {
-    public func held(by table: UnionObserver) {
-        table += self
-    }
-}
+// MARK: - EasyObserve
+public typealias EasyObserve = EasyObserved & EasyObserving

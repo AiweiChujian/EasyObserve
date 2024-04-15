@@ -14,9 +14,9 @@ enum UserGender: Equatable {
 }
 
 class UserModel: EasyObserved {
-    @Observable var name: String
-    @Observable var gender: UserGender
-    @Observable var age: Int
+    @EasyObservable var name: String
+    @EasyObservable var gender: UserGender
+    @EasyObservable var age: Int
         
     init(name: String, gender: UserGender, age: Int) {
         self.name = name
@@ -25,4 +25,4 @@ class UserModel: EasyObserved {
     }
 }
 
-typealias UserModelObserver = DistinctObserver<UserModel>
+typealias UserModelObserver = EasyObserverMap<UserModel>

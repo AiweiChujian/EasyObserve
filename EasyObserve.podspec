@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'EasyObserve'
-  s.version          = '1.4.0'
+  s.version          = '2.0.0'
   s.summary          = '轻量、便捷的 Swift 观察者模式'
 
 # This description is used to generate tags and improve search results.
@@ -20,21 +20,23 @@ Pod::Spec.new do |s|
   s.homepage         = 'https://github.com/AiweiChujian/EasyObserve'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'AiweiChujian' => 'hellohezhili@gmail.com' }
+  s.author           = { 'Avery' => 'hellohezhili@gmail.com' }
   s.source           = { :git => 'https://github.com/AiweiChujian/EasyObserve.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '10.0'
-  s.osx.deployment_target = '11.0'
+  s.ios.deployment_target = '13.0'
+  s.osx.deployment_target = '13.0'
   
   s.swift_versions = '5.0'
+  s.static_framework = true
+  s.module_name = 'EasyObserve'
   
   s.subspec 'Foundation' do |ss|
       ss.source_files = 'EasyObserve/Classes/Foundation/**/*'
   end
   
   s.subspec 'UIKit' do |ss|
-      ss.ios.deployment_target = '10.0'
+      ss.ios.deployment_target = '13.0'
       ss.source_files = 'EasyObserve/Classes/UIKit/**/*'
       ss.dependency 'EasyObserve/Foundation'
   end

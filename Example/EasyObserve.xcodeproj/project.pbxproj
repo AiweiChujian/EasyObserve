@@ -17,9 +17,9 @@
 		DB3F55B0280E974900C1180E /* ObserverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3F55AE280E974900C1180E /* ObserverVC.swift */; };
 		DB3F55B1280E974900C1180E /* ObserverVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB3F55AF280E974900C1180E /* ObserverVC.xib */; };
 		DB3F55B3280EA24800C1180E /* RootTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3F55B2280EA24800C1180E /* RootTableViewController.swift */; };
-		DBD1A9A92811297E0018C4B3 /* UnionObserverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1A9A82811297E0018C4B3 /* UnionObserverVC.swift */; };
-		DBD1A9AC28112D240018C4B3 /* DistinctObserverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1A9AB28112D240018C4B3 /* DistinctObserverVC.swift */; };
-		DBD1A9B2281130D30018C4B3 /* UnionObserverVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBD1A9B1281130D30018C4B3 /* UnionObserverVC.xib */; };
+		DBD1A9A92811297E0018C4B3 /* ObserverBagVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1A9A82811297E0018C4B3 /* ObserverBagVC.swift */; };
+		DBD1A9AC28112D240018C4B3 /* ObserverMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1A9AB28112D240018C4B3 /* ObserverMapVC.swift */; };
+		DBD1A9B2281130D30018C4B3 /* ObserverBagVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBD1A9B1281130D30018C4B3 /* ObserverBagVC.xib */; };
 		DBD6DE8F2809764A00668742 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD6DE8E2809764A00668742 /* UserModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,9 +54,9 @@
 		DB3F55AE280E974900C1180E /* ObserverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverVC.swift; sourceTree = "<group>"; };
 		DB3F55AF280E974900C1180E /* ObserverVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ObserverVC.xib; sourceTree = "<group>"; };
 		DB3F55B2280EA24800C1180E /* RootTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTableViewController.swift; sourceTree = "<group>"; };
-		DBD1A9A82811297E0018C4B3 /* UnionObserverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnionObserverVC.swift; sourceTree = "<group>"; };
-		DBD1A9AB28112D240018C4B3 /* DistinctObserverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistinctObserverVC.swift; sourceTree = "<group>"; };
-		DBD1A9B1281130D30018C4B3 /* UnionObserverVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnionObserverVC.xib; sourceTree = "<group>"; };
+		DBD1A9A82811297E0018C4B3 /* ObserverBagVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverBagVC.swift; sourceTree = "<group>"; };
+		DBD1A9AB28112D240018C4B3 /* ObserverMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverMapVC.swift; sourceTree = "<group>"; };
+		DBD1A9B1281130D30018C4B3 /* ObserverBagVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ObserverBagVC.xib; sourceTree = "<group>"; };
 		DBD6DE8E2809764A00668742 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		E4B3B3881E728BC3C005B688 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -178,9 +178,9 @@
 				DBD6DE8E2809764A00668742 /* UserModel.swift */,
 				DB3F55AE280E974900C1180E /* ObserverVC.swift */,
 				DB3F55AF280E974900C1180E /* ObserverVC.xib */,
-				DBD1A9A82811297E0018C4B3 /* UnionObserverVC.swift */,
-				DBD1A9B1281130D30018C4B3 /* UnionObserverVC.xib */,
-				DBD1A9AB28112D240018C4B3 /* DistinctObserverVC.swift */,
+				DBD1A9A82811297E0018C4B3 /* ObserverBagVC.swift */,
+				DBD1A9B1281130D30018C4B3 /* ObserverBagVC.xib */,
+				DBD1A9AB28112D240018C4B3 /* ObserverMapVC.swift */,
 			);
 			path = ObserveExample;
 			sourceTree = "<group>";
@@ -196,7 +196,7 @@
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				B0694199909D1C3899EAFE5E /* [CP] Embed Pods Frameworks */,
+				3B8709AF8045A4718AAFAC46 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -278,7 +278,7 @@
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				DB3F55B1280E974900C1180E /* ObserverVC.xib in Resources */,
-				DBD1A9B2281130D30018C4B3 /* UnionObserverVC.xib in Resources */,
+				DBD1A9B2281130D30018C4B3 /* ObserverBagVC.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,6 +311,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EasyObserve_Tests/Pods-EasyObserve_Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3B8709AF8045A4718AAFAC46 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EasyObserve_Example/Pods-EasyObserve_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/EasyObserve/EasyObserve.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EasyObserve.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EasyObserve_Example/Pods-EasyObserve_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		970C155051A4E0E892AB51E9 /* [CP] Check Pods Manifest.lock */ = {
@@ -357,24 +375,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B0694199909D1C3899EAFE5E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EasyObserve_Example/Pods-EasyObserve_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/EasyObserve/EasyObserve.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EasyObserve.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EasyObserve_Example/Pods-EasyObserve_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -382,9 +382,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBD1A9AC28112D240018C4B3 /* DistinctObserverVC.swift in Sources */,
+				DBD1A9AC28112D240018C4B3 /* ObserverMapVC.swift in Sources */,
 				DBD6DE8F2809764A00668742 /* UserModel.swift in Sources */,
-				DBD1A9A92811297E0018C4B3 /* UnionObserverVC.swift in Sources */,
+				DBD1A9A92811297E0018C4B3 /* ObserverBagVC.swift in Sources */,
 				DB3F55B0280E974900C1180E /* ObserverVC.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				DB3F55B3280EA24800C1180E /* RootTableViewController.swift in Sources */,
@@ -543,7 +543,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ZDY99KXKVP;
 				INFOPLIST_FILE = EasyObserve/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hellohezhli.EasyObserve-Example";
@@ -560,7 +560,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ZDY99KXKVP;
 				INFOPLIST_FILE = EasyObserve/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hellohezhli.EasyObserve-Example";

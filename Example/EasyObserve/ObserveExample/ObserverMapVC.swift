@@ -1,5 +1,5 @@
 //
-//  DistinctObserverVC.swift
+//  ObserverMapVC.swift
 //  EasyObserve_Example
 //
 //  Created by Aiwei on 2022/4/21.
@@ -9,11 +9,11 @@
 import UIKit
 import EasyObserve
 
-class DistinctObserverVC: UITableViewController {
+class ObserverMapVC: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Distinct Observer"
+        self.title = "Observer Map"
         tableView.register(Cell.self, forCellReuseIdentifier: NSStringFromClass(Cell.self))
     }
     
@@ -38,7 +38,7 @@ class DistinctObserverVC: UITableViewController {
     }
 }
 
-extension DistinctObserverVC {
+extension ObserverMapVC {
     
     private class Cell: UITableViewCell {
         
@@ -50,18 +50,17 @@ extension DistinctObserverVC {
             fatalError("init(coder:) has not been implemented")
         }
         
-        let distinctObserver = UserModelObserver()
+        let observerMap = UserModelObserver()
         
         func setUser(_ user: UserModel) {
-            // DistinctObserver 中一个 keyPath 对应一个观察者, 不用手动移除对上一个 model 的观察
-//            distinctObserver.removeAll()
+            // ObserverMap 中一个 keyPath 对应一个观察者, 不用手动移除对上一个 model 的观察
             
-            distinctObserver[\.name] = user.$name.observe(subscriber: {[unowned self] value, change, option in
+            observerMap[\.name] = user.$name.observe(subscriber: {[unowned self] value, change, option in
                 self.textLabel?.text = value
             })
             
-            // DistinctObserver 管理 CombineObserver, 选择其中一个属性的 keyPath 作为下标即可
-            distinctObserver[\.gender] = (user.$gender & user.$age).combineObserve(subscriber: { [unowned self] value, _ in
+            // ObserverMap 管理 CombineObserver, 选择其中一个属性的 keyPath 作为下标即可
+            observerMap[\.gender] = (user.$gender & user.$age).combineObserve(subscriber: { [unowned self] value, _ in
                 self.detailTextLabel?.text = "\(value.0.showText) - \(value.1)"
             })
         }

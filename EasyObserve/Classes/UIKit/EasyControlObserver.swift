@@ -5,19 +5,20 @@
 //  Created by Aiwei on 2022/7/28.
 //
 
-import UIKit
+import Foundation
 
-public final class EZControlObserver {
+@MainActor
+public final class EasyControlObserver {
     public private(set) weak var control: UIControl?
     
     public let event: UIControl.Event
     
-    private var handler: EZActionHandlerType?
+    private var handler: EasyActionHandlerType?
     
     public init<T: UIControl>(_ control: T, event: UIControl.Event, actionHandler: @escaping (T) -> Void) {
         self.control = control
         self.event = event
-        self.handler = EZActionHandler(actionHandler: actionHandler)
+        self.handler = EasyActionHandler(actionHandler: actionHandler)
         control.addTarget(self, action: #selector(controlAction(_:)), for: event)
     }
     
@@ -26,11 +27,11 @@ public final class EZControlObserver {
     }
 }
 
-fileprivate protocol EZActionHandlerType {
+fileprivate protocol EasyActionHandlerType {
     func sendAction(sender: UIControl)
 }
 
-fileprivate struct EZActionHandler<T>: EZActionHandlerType {
+fileprivate struct EasyActionHandler<T>: EasyActionHandlerType {
     let actionHandler: (T) -> Void
     
     func sendAction(sender: UIControl) {
@@ -41,7 +42,7 @@ fileprivate struct EZActionHandler<T>: EZActionHandlerType {
     }
 }
 
-extension EZControlObserver: ObserverType {
+extension EasyControlObserver: EasyObserverType {
     public func invalidate() {
         control?.removeTarget(self, action: #selector(controlAction(_:)), for: event)
         handler = nil
