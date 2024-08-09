@@ -23,52 +23,42 @@ pod 'EasyObserve'
 
 ## Usage
 
-EasyObserve的使用和闭包KVO相似，相比于闭包KVO，主要解决了以下痛点：
+EasyObserve是为了提供一种简单、轻量的观察者模式工具，EasyObserve的使用和闭包KVO相似，相比于闭包KVO，主要解决了以下痛点：
 
 * NSObject的子类才能使用KVO（需要`@objc dynamic`修饰属性），而任意类类型都可以使用EasyObserve
-* 闭包KVO在对多个观察的管理和避免重复观察时很不方便，EasyObserve提供了[UnionObserver](#3-unionobserver) 和[DistinctObserver](#4-distinctobserver)来方便对观察的管理
-* KVO对多个值的合并观察需要引入一个中间值，再对中间值进行观察才能完成，EasyObserver可以通过[CombineObserver](#5-combineobserver)非常方便对多个值进行合并观察
+* 闭包KVO在对多个观察的管理和避免重复观察时很不方便，EasyObserve提供了[EasyObserverBag](#3-EasyObserverBag) 和[EasyObserverMap](#4-EasyObserverMap)来方便对观察的管理
+* KVO对多个值的合并观察需要引入一个中间值，再对中间值进行观察才能完成，EasyObserver可以通过[EasyCombineObserver](#5-EasyCombineObserver)非常方便对多个值进行合并观察
 
-### 1. Observable
+> KXYZObserve 不是线程安全的，设计为主线程中进行数据和状态的同步。
 
-通常只有类（引用类型）才具有被观察的意义，通过`@Observable`包装类的可观察属性：
+### 1. EasyObservable
+
+通常只有类（引用类型）才具有被观察的意义，通过`@EasyObservable`包装类的可观察属性：
 
 ```swift
 import EasyObserve
 
 class UserModel: EasyObserved {
-    @Observable var name: String
-    @Observable var gender: UserGender
-    @Observable var age: Int
+    @EasyObservable var name: String
+    @EasyObservable var age: Int
         
-    init(name: String, gender: UserGender, age: Int) {
+    init(name: String, age: Int) {
         self.name = name
-        self.gender = gender
         self.age = age
     }
 }
-
-enum UserGender: Equatable {
-    case male, female
-}
 ```
 
-### 2. Observer
+### 2. EasyObserver
 
-EasyObserver使用和系统闭包KVO相似的观察管理策略，即对属性观察后返回一个观察者对象，在观察者对象释放时，自动移除对应的观察。`@Observable`包装的可观察属性通过其呈现值（`$+属性名`）添加观察：
+EasyObserver使用和系统闭包KVO相似的观察管理策略，即对属性观察后返回一个观察者对象，在观察者对象释放时，自动移除对应的观察。`@EasyObservable`包装的可观察属性通过其呈现值（`$<属性名>`）添加观察：
 
 ```swift
-var nameObserver: Observer?
-var genderObserver: Observer?
-var ageObserver: Observer?
+var nameObserver: EasyObserver?
+var ageObserver: EasyObserver?
 
 // 默认为 [.initial, .new]
 nameObserver = user.$name.observe(subscriber: {[unowned self] value, change, option in
-    /* 订阅代码 */
-})
-
-// initial
-genderObserver = user.$gender.observe(options: [.initial], subscriber: {[unowned self] value, change, option in
     /* 订阅代码 */
 })
 
@@ -78,69 +68,68 @@ ageObserver = user.$age.observe(options: [.new], subscriber: {[unowned self] val
 })
 ```
 
-> EasyObserve在添加观察时，支持`.inintial`和`.new`两种option
+> EasyObserve在添加观察时，支持`.inintial`、`.new`、`prior` 和 `defer` 四种 options
 
-### 3. UnionObserver
+### 3. EasyObserverBag
 
-通常在每个Controller中会添加多个观察者，你可以通过`UnionObserver`和`+=`运算符来集中持有它们，上面的代码可以改为：
+通常在每个Controller中会添加多个观察者，你可以通过`EasyObserverBag`和`+=`运算符来集中持有它们，上面的代码可以改为：
 
 ```swift
-let unionObserver = UnionObserver()
+let observerBag = EasyObserverBag()
 
-// 默认为 [.initial, .new]
-unionObserver += user.$name.observe(subscriber: {[unowned self] value, change, option in
+observerBag += user.$name.observe(subscriber: {[unowned self] value, change, option in
     /* 订阅代码 */
 })
 
-// initial
-unionObserver += user.$gender.observe(options: [.initial], subscriber: {[unowned self] value, change, option in
+observerBag += user.$age.observe(subscriber: {[unowned self] value, change, option in
+    /* 订阅代码 */
+})
+```
+
+#### EasyObserving
+
+遵循`EasyObserving`协议的对象，会由协议默认创建一个关联的`observerBag`，EasyObserver 也可以通过`held(by:)`方法快捷快捷添加到 EasyObserverBag 中。
+
+### 4. EasyObserverMap
+
+向`EasyObserverBag`中添加的观察是**可以重复并存**的，在重复设值的场景中（如：复用的 UITableViewCell），往往希望对同一类型的同一属性的观察是不重复的，你可以通过`EasyObserverMap` 来完成：
+
+```swift
+typealias UserModelObserver = EasyObserverMap<UserModel>
+
+let observerMap = UserModelObserver()
+
+// 默认为 [.initial, .new]
+observerMap[\.name] = user.$name.observe(subscriber: {[unowned self] value, change, option in
     /* 订阅代码 */
 })
 
 // new
-unionObserver += user.$age.observe(options: [.new], subscriber: {[unowned self] value, change, option in
+observerMap[\.age] = user.$age.observe(options: [.new], subscriber: {[unowned self] value, change, option in
     /* 订阅代码 */
 })
 ```
 
-### 4. DistinctObserver
+### 5. EasyCombineObserver
 
-向`UnionObserver`中添加的观察是**可以重复并存**的，在重复设值的场景中（如：UITableViewCell），往往希望对同一类型的同一属性的观察是不重复的，你可以通过`DistinctObserver`和`-=`运算符来完成：
-
+很多时候我们需要对属性进行合并观察，EasyObserve提供了`&`运算符来创建CombineObserver，最多支持8个属性的合并观察：
 ```swift
-typealias UserModelObserver = DistinctObserver<UserModel>
+var combineObserver: EasyObserver?
 
-let distinctObserver = UserModelObserver()
-
-// 默认为 [.initial, .new]
-distinctObserver[\.name] = user.$name.observe(subscriber: {[unowned self] value, change, option in
-    /* 订阅代码 */
-})
-
-// initial
-distinctObserver[\.gender] = user.$gender.observe(options: [.initial], subscriber: {[unowned self] value, change, option in
-    /* 订阅代码 */
-})
-
-// new
-distinctObserver[\.age] = user.$age.observe(options: [.new], subscriber: {[unowned self] value, change, option in
+combineObserver = (user.$name & user.$age & user.$age).combineObserve(subscriber: { [unowned self] value, option in
     /* 订阅代码 */
 })
 ```
 
-### 5. CombineObserver
+> 对更多值的合并观察，可以将观察结果写入到一个合并的值类型（元组、结构体、字典等）中，再对这个合并的中间值添加观察。
 
-很多时候我们需要对属性进行合并观察，EasyObserve提供了`&`运算符来创建CombineObserver，最多支持8个属性的合并观察，对更多值的合并观察，可以将观察结果写入到一个合并的值类型（元组、结构体、字典等）中，再对这个合并的中间值添加观察：
+> 合并观察返回的也是一个`EasyObserver`，可以通过`EasyObserverBag`或`EasyObserverMap`进行管理。
 
-```swift
-var combineObserver: Observer?
+### 6. Others
 
-combineObserver = (user.$name & user.$gender & user.$age).combineObserve(subscriber: { [unowned self] value, option in
-    /* 订阅代码 */
-})
-```
+EasyObserve 还对 Notification 和 UIControl 进行了扩展，让通知和 UIControl 的事件的响应可以与对 EasyObserver 的观察有一致的管理方式。
 
-> 合并观察返回的也是一个`Observer`，可以通过`UnionObserver`或`DistinctObserver`进行管理
+> 使用方式查看 `EasyNotification`和`EasyControlObserver`。
 
 ## Author
 
